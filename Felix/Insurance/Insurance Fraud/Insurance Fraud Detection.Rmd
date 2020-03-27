@@ -1,0 +1,58 @@
+---
+title: "R/Business - Insurance Fraud Detection"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Business - Insurance Fraud Detection I
+
+Our goal at R Business is to encourage the use of R Studio in a varity of industries where it's use has been underdevloped. One of these industries is insurance where Excle, VBA and SAS still seem to be the dominant forces. This tutorial is meant to show a simple example of what R Studio is capable of in an insurance related use case. Namely the detection of potential fraudulent activity. This is an extremely simplified data set and workflow, but the basic procedure remains the same even in more complex real world examples.
+
+## Load Libraries
+
+The firt step is to load all the libraries you will need during this example
+
+```{r, warning=FALSE}
+# Load Libraries
+library(dplyr)
+library(readr)
+library(randomForest)
+library(rfUtilities)
+library(rsample)
+library(ggplot2)
+library(caret)
+library(e1071)
+```
+
+## Load Data
+
+Then load the data
+
+```{r data, echo=FALSE}
+#Loading and Discovery
+
+# Load Data
+data <- read_csv("insurance_claims.csv")
+
+# First Look at Data
+head(data)
+```
+
+
+## 
+
+
+```{r pressure, echo=FALSE}
+# Check Types
+sapply(data, class)
+
+# Summarize Data
+summary(data)
+
+# Check for NAs 
+data[!complete.cases(data),] #non found
+```
+
