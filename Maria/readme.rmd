@@ -1,4 +1,4 @@
-This part is for accounting and finance -focused used who wish to explore R and what R is to offer for accounting/finance.
+This part is for **accounting** and **finance**-focused used who wish to explore R and what R is to offer for accounting/finance.
 
 The main focus here is on:
 
@@ -11,3 +11,7 @@ The main focus here is on:
 - reconciliation of accounting information
 
 - basic Excel functions in R for accounting and finance users
+
+
+- auditing: modeling in R to detect from in financial data
+
