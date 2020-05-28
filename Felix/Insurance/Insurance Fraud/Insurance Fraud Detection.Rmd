@@ -11,11 +11,15 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ## R Business - Insurance Fraud Detection I
 
-Our goal at R Business is to encourage the use of R Studio in a varity of industries where it's use has been underdevloped. One of these industries is insurance where Excle, VBA and SAS still seem to be the dominant forces. This tutorial is meant to show a simple example of what R Studio is capable of in an insurance related use case. Namely the detection of potential fraudulent activity. This is an extremely simplified data set and workflow, but the basic procedure remains the same even in more complex real world examples.
+Our goal at R Business is to encourage the use of R Studio in a varity of industries where it is current use has been underdevloped. One of these industries is insurance where Excel, VBA and SAS still seem to be the dominant forces. This tutorial is meant to show a simple example of what R Studio is capable of in an insurance related Use Case. Namely the detection of potential fraudulent activity. This is an extremely simplified data set and workflow, but the basic procedure remains the same even in more complex real world examples.
+
+## Assumptions
+
+This tutorial assumes some basic competency with [R Studio](https://rstudio.com/) and the [Random Forest](https://en.wikipedia.org/wiki/Random_forest) method. If you aren't familiar with these I would recommend you first read up n them in the links provided. 
 
 ## Load Libraries
 
-The first step is to load all the libraries you will need during this example
+The first step is to load all the libraries you will need during this example. We will need quite a lot of them in order to properly run this analysis. One of the main benefits of R Studio is the richness of high quality libraries for complex statistical methods.
 
 ```{r, warning=FALSE}
 # Load Libraries
@@ -27,11 +31,12 @@ library(rsample)
 library(ggplot2)
 library(caret)
 library(e1071)
+library(skimr)
 ```
 
 ## Load Data
 
-Then load the data
+Then load the data and perform an initial check. This particular dataset if from [Kaggle](https://www.kaggle.com/buntyshah/auto-insurance-claims-data). I would recommend downloading it and putting it into your local directory.
 
 ```{r data, echo=FALSE}
 #Loading and Discovery
@@ -43,9 +48,9 @@ data <- read_csv("insurance_claims.csv")
 head(data)
 ```
 
-
 ## Inspect Data
 
+Since everything seems fine we should dive a little deeper into it. Let's check data types and NAs. The "skim" function also provides a lot of insight.
 
 ```{r data, echo=FALSE}
 # Check Types
@@ -55,16 +60,17 @@ sapply(data, class)
 data[!complete.cases(data),] #non found
 
 # Summarize Data
-summary(data)
+skim(data)
 ```
 
 ## Data Wrangling
 
+This part is where it gets (a little) tricky. If we had found any NAs we would have had to remove them at this point. The na.omit() function makes that very easy. Good data cleaning can be about 80% of the work in these projects, but luckliy we already have some very clean data. All we need to do here is convert some of the column types to more sensical formats.
 
 ```{r data, echo=FALSE}
 #Data Wrangling
-data$fraud_reported[data$fraud_reported == 'Y']  <- 1
-data$fraud_reported[data$fraud_reported == 'N']  <- 0
+#data$fraud_reported[data$fraud_reported == 'Y']  <- 1
+#data$fraud_reported[data$fraud_reported == 'N']  <- 0
 data$fraud_reported <- as.integer(data$fraud_reported)
 data$insured_zip <- as.character(data$insured_zip)
 data$policy_bind_date <- as.Date(data$policy_bind_date, format = '%m/%d/%y')
@@ -74,6 +80,8 @@ sapply(sapply(data, unique), length)
 ```
 # Prepare Data for RF
 
+Random Forest wont work if there are too many unique values in a factor, which is why we remove those above a certain threshhold. This is more art than science though. The Random Forest will give you a warning if you exceed certain limits.
+
 ```{r data, echo=FALSE}
 # Drop obvious colimns
 drops <- c('incident_location','policy_bind_date','incident_date','insured_occupation','insured_zip', 'policy_number')
@@ -81,7 +89,7 @@ data <- data[ , !(names(data) %in% drops)]
 
 # turn into factors
 data <- data %>% mutate_if(is.character, as.factor)
-data$fraud_reported <- as.factor(data$fraud_reported)
+#data$fraud_reported <- as.factor(data$fraud_reported)
 ```
 
 ## Split Data
