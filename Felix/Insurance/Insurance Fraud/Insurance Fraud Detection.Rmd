@@ -69,9 +69,6 @@ This part is where it gets (a little) tricky. If we had found any NAs we would h
 
 ```{r data, echo=FALSE}
 #Data Wrangling
-#data$fraud_reported[data$fraud_reported == 'Y']  <- 1
-#data$fraud_reported[data$fraud_reported == 'N']  <- 0
-data$fraud_reported <- as.integer(data$fraud_reported)
 data$insured_zip <- as.character(data$insured_zip)
 data$policy_bind_date <- as.Date(data$policy_bind_date, format = '%m/%d/%y')
 
@@ -89,10 +86,11 @@ data <- data[ , !(names(data) %in% drops)]
 
 # turn into factors
 data <- data %>% mutate_if(is.character, as.factor)
-#data$fraud_reported <- as.factor(data$fraud_reported)
 ```
 
 ## Split Data
+
+As in any good analysis we need test and training data. We use a seed so that others ca replicate the random process later.
 
 ```{r data, echo=FALSE}
 
@@ -107,6 +105,8 @@ data_test  <- testing(data_split )
 
 ## Basic Implementation & Analysis
 
+Now we get to the really fun part. R makes it easy to implement a Random Forest. This will act as our baseline for tuning
+
 ```{r data, echo=FALSE}
 # Basic Implementation & Analysis
 
@@ -120,6 +120,8 @@ rf1
 ```
 
 # Check Results
+
+This doesn't look bad for a first try. Let's get a better look by visualizing the performance.
 
 ```{r data, echo=FALSE}
 # Plot tree
@@ -137,6 +139,7 @@ rf1$importance
 
 ## RF Initial Validation
 
+In order to do further tuning we now need to split of another chunk for our validation data. This part is not working right atm.
 
 ```{r data, echo=FALSE}
 # Split down set further for validation set on training data
@@ -203,15 +206,19 @@ rf2 <- randomForest(
   ntree = 500,
   mtry = 15
 )
+
+# Check result
+rf2
 ```
 
 
 # Check results
-
+Nice Improvement!
 
 ```{r data, echo=FALSE}
 rf2
-
+```
+```{r data, echo=FALSE}
 # Plot tree
 plot(rf2)
 
@@ -219,20 +226,23 @@ plot(rf2)
 rf2$importance
 ```
 
-
 ## Predicting
+
+Now we use this RF model to predict the test set. This seems to still be a bit buggy now.
 
 ```{r data, echo=FALSE}
 # randomForest
 pred_randomForest <- predict(rf2, data_test)
 head(pred_randomForest)
+```
 
+```{r data, echo=FALSE}
 # Make pred column
 data_test$pred <- predict(rf2, data_test)
 data_test$pred_final <- as.integer(ifelse(data_test$pred > 0.3 ,1 ,0))
                           
 # Confusion Matrix
-confusionMatrix(as.factor(data_test$fraud_reported), as.factor(data_test$pred_final))
+#confusionMatrix(as.factor(data_test$fraud_reported), as.factor(data_test$pred_final))
 ```
 
 
