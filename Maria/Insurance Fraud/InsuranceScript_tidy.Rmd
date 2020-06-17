@@ -1,0 +1,12 @@
+---
+title: "InsuranceScript_tidy"
+author: "MariaProkofieva"
+date: "13/06/2020"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
