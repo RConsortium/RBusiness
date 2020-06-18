@@ -10,3 +10,16 @@ runtime: shiny
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+#The same version as Felix's but with a tidyverse/tidymodels 
+
+#loading libraries
+#install.packages(tidyverse)
+#install.packages(tidymodels)
+
+library(tidyverse)
+library(skimr)
+library(tidymodels)
+
+data<-read_csv("Felix/Insurance/Insurance Fraud/insurance_claims.csv")
+
+skim(data)
