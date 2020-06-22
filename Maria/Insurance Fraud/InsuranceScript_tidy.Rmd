@@ -13,25 +13,123 @@ knitr::opts_chunk$set(echo = TRUE)
 # The same version as Felix's but with a tidyverse/tidymodels 
 
 # loading libraries
-# install.packages(tidyverse)
-# install.packages(tidymodels)
+# install.packages("tidyverse")
+# install.packages("tidymodels")
+# install.packages("ranger")
 
 library(tidyverse)
 library(skimr)
 library(tidymodels)
+library(ranger)
 
 data<-read_csv("Felix/Insurance/Insurance Fraud/insurance_claims.csv")
 head(data)
 # summary stats in a "nice" format
 skim(data)
 
-# conversion is needed for several variables to factors
+# Drop obvious colimns
 data<-data %>%
-  mutate(across(where(is.character) & !c(policy_bind_date, incident_date, incident_location), as_factor))
- 
+  select (-c(incident_location, 
+      policy_bind_date,
+      incident_date, 
+      insured_occupation, 
+      insured_zip, 
+      policy_number))%>%
+#convert strings to factors
+      mutate(across(where(is.character), as_factor))
+      
 skim(data)
   
+glimpse(data)       
+
+#viz  - to be added - very simple at this stage    
+data %>%
+  ggplot(aes(auto_year, total_claim_amount, color = incident_type)) +
+  geom_col(size = 0.5, alpha = 0.4) +
+  labs(color = NULL)
+
+
+# For reproducability
+set.seed(52)
+
+# Split Data
+data_split<-initial_split(data) #strata?
+data_train<-training(data_split)
+data_test<-testing(data_split)
+
+#cross-validation setup
+data_cv <- vfold_cv(data_train)
+
+
+#setting up a recipe for data prep
+recipeNew <- recipe(fraud_reported ~ ., data = data_train)%>%
+#  step_string2factor(all_nominal(), -all_outcomes()) %>% #or
+  step_normalize(all_numeric()) %>%
+  prep()
+
+#let's view the recipe
+recipeNew
+
+#prep training data
+data_train_prep <- recipeNew %>%
+  juice()
+  
+data_train_prep  
+  
+#define the model 
+model1 <-
+  rand_forest() %>%
+#to include mtry parameter for tuning  
+  set_args(mtry=tune()) %>%
+#set the engine
+  set_engine("ranger", importance="impurity") %>%
+  set_mode("classification")
   
   
-  
+#setting up the workflow
+workflow1 <-workflow() %>%
+  add_recipe(recipeNew) %>%
+  add_model(model1)
+
+# specify which values eant to try
+grid1 <- expand.grid(mtry = c(3, 4, 5))
+# extract results
+tune_results <- workflow1 %>%
+  tune_grid(resamples = data_cv, 
+            grid = grid1, #
+            metrics = metric_set(accuracy, roc_auc) # metrics to see
+            )
+
+#let's see metrics
+tune_results %>%
+  collect_metrics()
+
+#select the best parameter  
+param_final <- tune_results %>%
+  select_best(metric = "accuracy")
+
+param_final  
+
+#add to workflow
+workflow1 <- workflow1 %>%
+  finalize_workflow(param_final)
+
+# evaluate on the test set
+fit1 <- workflow1 %>%
+#training set fit to evaluate on test set
+  last_fit(data_split)
+
+fit1
+
+#metrics
+test_performance <- fit1 %>% collect_metrics()
+
+test_performance 
+
+#predict
+test_predictions <- fit1 %>% collect_predictions()
+
+test_predictions
+
+
   
