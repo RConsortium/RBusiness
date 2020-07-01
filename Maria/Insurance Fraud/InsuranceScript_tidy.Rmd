@@ -22,7 +22,7 @@ library(skimr)
 library(tidymodels)
 library(ranger)
 
-data<-read_csv("Felix/Insurance/Insurance Fraud/insurance_claims.csv")
+data<-read_csv("/Users/felixschildorfer/Documents/GitHub/RBusiness/Felix/Insurance/Insurance Fraud/insurance_claims.csv")
 head(data)
 # summary stats in a "nice" format
 skim(data)
