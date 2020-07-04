@@ -1,0 +1,24 @@
+# Landscape of accounting in the R universe
+
+
+## Introduction
+Why R for accounting: other tools based on problems to solve
+Data skills for new generation of accountants - coding is dreaded but working with data is appreciated
+
+What’s on the plate or.. better huge black hole
+
+## Background
+From bookkeeping to excel to r
+
+## Method
+Data collection - cran and github ( package in development)
+Alignment with accounting tasks
+
+## Results and discussion
+Themes/ topics
+Alignment with current developments
+Priority areas for developments - current gaps and push to automate
+
+How to get accountants on board - use, training, further development
+
+## Conclusion
