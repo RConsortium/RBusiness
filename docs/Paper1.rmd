@@ -31,3 +31,15 @@ list of packages which you think we need to include in the paper
 Maria: same
 
 next time: alignmentwith accounting tasks - classification/themes
+
+
+classification:
+
+1. Reporting and communication:
+RShiny/ flexdashboard / Rmarkdown
+
+2. external records access
+XBRL / finstr
+
+https://cran.r-project.org/web/packages/XBRL/index.html
+https://github.com/bergant/finstr
