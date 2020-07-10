@@ -22,3 +22,12 @@ Priority areas for developments - current gaps and push to automate
 How to get accountants on board - use, training, further development
 
 ## Conclusion
+
+
+Felix: 
+
+list of packages which you think we need to include in the paper
+
+Maria: same
+
+next time: alignmentwith accounting tasks - classification/themes
