@@ -43,3 +43,6 @@ XBRL / finstr
 
 https://cran.r-project.org/web/packages/XBRL/index.html
 https://github.com/bergant/finstr
+
+
+Tidy Accounting!!!!! - new package? new paper!
