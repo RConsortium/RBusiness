@@ -1,5 +1,11 @@
 Weekly meetings are held on Fridays (PST)/ Saturdays (AEDT)
 
+
+# 5 September:
+Goals to be linked to practical things
+
+put on front page of github the chopped version and reorganise folders
+
 -----------------------------
 # 25 July:
 
