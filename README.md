@@ -9,16 +9,14 @@ Promote the use of the R programming environment and the R ecosystem in business
 
 ## Mission:
 
-1. promoting uses of R and moving business from using Excel to R in their operations, reporting or other activities
+1. Providing a common platform for accounting/business professionals and data scientists to collaborate on resolution of accounting/business related problems and network
+    a. Organization and sponsorship of events that align with the goals and mission of R Business 
 
-2. developing R tools tailored for business applications across various subindustries, including insurance, finance, accounting, retail, etc.
+2. Development and maintenance of R packages to solve accounting and business related problems, including ethical use of R for data analytics
 
-## Key areas
-
-* Finance
-* Accounting
-* Financial services: insurance
-
+3. Education and raising awareness among accounting professionals about R, RStudio and R community. 
+    a. Creating educational resources for adoption and use of R to address accounting-related problems, including migration from other software (e.g. Excel) and solution of existing accounting issues
+    b. Providing general and technical advice on the use of existing R packages to the accounting profession and businesses.
 
 ## Mapping business process to R packages/tutorials
  
