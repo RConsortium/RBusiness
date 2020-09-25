@@ -21,7 +21,7 @@ This tutorial assumes some basic competency with [R Studio](https://rstudio.com/
 
 The first step is to load all the libraries you will need during this example. We will need quite a lot of them in order to properly run this analysis. One of the main benefits of R Studio is the richness of high quality libraries for complex statistical methods.
 
-```{r data, warning=FALSE}
+```{r lib, warning=FALSE}
 # Load Libraries
 library(dplyr)
 library(readr)
@@ -38,7 +38,7 @@ library(skimr)
 
 The next step is to load the data and perform an initial check. This particular dataset if from [Kaggle](https://www.kaggle.com/buntyshah/auto-insurance-claims-data). I would recommend downloading it and putting it into your [local directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces).
 
-```{r data, echo=FALSE}
+```{r data}
 #Loading and Discovery
 
 # Load Data
@@ -52,7 +52,7 @@ head(data)
 
 Since everything seems fine we should dive a little deeper into it. Let's check data types and NAs. The "skim" function also provides a lot of insight.
 
-```{r data, echo=FALSE}
+```{r inspect}
 # Check Types
 sapply(data, class)
 
@@ -67,7 +67,7 @@ skim(data)
 
 This part is where it gets (a little) tricky. If we had found any NAs we would have had to remove them at this point. The na.omit() function makes that very easy. Good data cleaning can be about 80% of the work in these projects, but luckliy we already have some very clean data. All we need to do here is convert some of the column types to more sensical formats.
 
-```{r data, echo=FALSE}
+```{r wrangle, echo=FALSE}
 #Data Wrangling
 data$insured_zip <- as.character(data$insured_zip)
 data$policy_bind_date <- as.Date(data$policy_bind_date, format = '%m/%d/%y')
@@ -77,7 +77,7 @@ data$policy_bind_date <- as.Date(data$policy_bind_date, format = '%m/%d/%y')
 
 Next we turn the character columns into factors, so that they work with the Random Forest function. We also check the amount of unique values per column.
 
-```{r data, echo=FALSE}
+```{r prep}
 # turn into factors
 data <- data %>% mutate_if(is.character, as.factor)
 
@@ -87,7 +87,7 @@ sapply(sapply(data, unique), length)
 
 Random Forest wont work if there are too many unique values in a factor, which is why we remove those above a certain threshhold. This is more art than science though. The Random Forest will give you a warning if you exceed certain limits.
 
-```{r data, echo=FALSE}
+```{r prep 2}
 # Drop obvious colimns
 drops <- c('incident_location','policy_bind_date','incident_date','insured_occupation','insured_zip', 'policy_number')
 data <- data[ , !(names(data) %in% drops)]
@@ -97,7 +97,7 @@ data <- data[ , !(names(data) %in% drops)]
 
 As in any good analysis we need test and training data. We use a seed so that others ca replicate the random process later.
 
-```{r data, echo=FALSE}
+```{r split}
 
 # For reproducability
 set.seed(52)
@@ -112,7 +112,7 @@ data_test  <- testing(data_split )
 
 Now we get to the really fun part. R makes it easy to implement a Random Forest. This will act as our baseline for tuning.
 
-```{r data, echo=FALSE}
+```{r rf}
 # Basic Implementation & Analysis
 
 # default RF model
@@ -128,7 +128,7 @@ rf1
 
 This doesn't look bad for a first try. Let's get a better look by visualizing the performance.
 
-```{r data, echo=FALSE}
+```{r check}
 # Plot tree
 plot(rf1)
 
@@ -139,7 +139,13 @@ rf1$importance
 
 In order to improve our initial results we can use the tuneRF() function. It will help us find the right values for the number of trees.
 
-```{r data, echo=FALSE}
+```{r tune}
+# create training and validation data 
+data_split <- initial_split(data_train, .8)
+
+# validation data
+data_valid <- assessment(data_split)
+
 # names of features
 features <- setdiff(names(data_valid),"fraud_reported")
 
@@ -160,7 +166,7 @@ rf2 <- tuneRF(
 
 Nice Improvement!
 
-```{r data, echo=FALSE}
+```{r rf2}
 # Try best version
 rf2 <- randomForest(
   x          = data_train[features],
@@ -176,7 +182,7 @@ rf2
 
 # Vizualize 
 
-```{r data, echo=FALSE}
+```{r check2}
 # Plot tree
 plot(rf2)
 
@@ -188,7 +194,7 @@ rf2$importance
 
 Now we use this RF model to predict the test set. This seems to still be a bit buggy now.
 
-```{r data, echo=FALSE}
+```{r pred}
 # randomForest
 data_test$pred <- predict(rf2, data_test)
 table(observed = data_test$fraud_reported, predicted = data_test$pred)
