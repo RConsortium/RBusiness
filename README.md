@@ -7,10 +7,12 @@ We are a group R Users from different areas of business and financial services c
 
 The goal of R/Business is the promotion and support of the R programming environment and the R ecosystem in business practices and business research. This is done through:
 
-1. A common collaboration platform
+1. Development of a community-based collaboration platform
 2. Organization and sponsorship of events
-3. Development and maintenance of R packages
-4. Education and promotion about the uses for the R ecosystem for business/accounting
+3. Research on relevant topics in the intersection of business/accounting and technology
+4. Development of openly available courses/tutorials
+5. Development and maintenance of R packages
+
 
 ## Interested in contributing?
 
