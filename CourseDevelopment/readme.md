@@ -65,3 +65,13 @@ or relate to accounting data - e.g. bank statements, sales orders, procurement d
 
 **12 topics**:
 
+**TASK 2 for your FELIX**:
+
+search for "accounting related datasets" - sales orders, customer info, bank statements, procurement documents ANYTHING! it needs to be in free domain
+
+**TASK 2 for your Maria**:
+LIST OF BOOKS HERE WITH LINKS:
+
+
+
+
