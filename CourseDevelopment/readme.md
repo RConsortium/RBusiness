@@ -69,7 +69,14 @@ relate to data wrangling tasks?
 
 or relate to accounting data - e.g. bank statements, sales orders, procurement documents, etc.
 
-**12 topics**:
+
+
+**10 topics**:
+
+1. Introduction: Introduce R and tidyverse in first lesson
+  - Installing Libraries
+  - Basic Functions/Variables and Datatypes with Accounting examples
+  - What is tidy data
 
 **TASK 2 for your FELIX**:
 
