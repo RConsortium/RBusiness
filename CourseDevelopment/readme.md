@@ -1,18 +1,18 @@
-**Title**: Data Science in Accounting or Introduction to Tidy Accounting
+**Title**: Introduction to accounting analytics with R
+
+Data Science in Accounting or Introduction to Tidy Accounting
 
 **Target audience**: 
-accountants who want to get to data science. 
+accountants who want to get to data science or
+data scientists who want to enter accounting area
 
-More focus on analytics, they DO KNOW ACCOUNTING
-
-**Expected knowledge**: accounting, (what level of Accounting? Current Accounting Students? CPA Level?)
-
-NO knowledge on analytics or R
+**Selling point**:
+tailored to accounting domain with specific examples from accounting: 
+how to solve particular accounting problems such as analysis of working capital, evaluation of accounts receivable
 
 
-this means that we should include
+**Expected knowledge**: "some" accounting and "some" data science knowlege
 
-R basics + analytical methods
 
 **Technology**:
 
@@ -24,64 +24,97 @@ videos?
 
 rmarkdown?hosting? - options? - R Notebooks look good: https://blog.rstudio.com/2016/10/05/r-notebooks/
 
-**libraries**
-
-stick to one. not to distract.
+**Libraries**
 
 tidyverse and base R (I would also suggest FinancialMath and/or tidyquant)
 
 **Objectives**:
 
-I do not want to do simple "data science" course - it needs to cover PARTICULAR tasks where data science can help, 
+12 topics with a focus on working with accounting data and tidy approch.
 
-I do not want to teach R with accounting examples unless we are doing a SERIES of courses where'
+Introduction into how data science can create value in accounting processes and create insights into accounting data
 
-Course 1: R for accounting - data wrangling with accounting examples
+Aim: use data analyis tools to understand accounting phenomenon (e.g. accounting applications such as accounting transactions)
 
-Course 2: data science for accounting - data wrangling with accountin examples - 
 
-**TASK 1 for your FELIX**: think about basic data science tasks - how those BASICS can be used in accounting (MARIA):
+**Preliminary plan for topics**:
 
+1. Introduction: why accounting and why data science (=data analytics as the term is more familiar to accountants)
+
+
+Working with RStudio and RStudio cloud
+workflow basics and coding basics (e.g. assigning variables, functions)
+working with projects and libraries 
+
+2. Introduction to accounting data
+importing and loading files (single and multiple), merging datasets, data types
+saving results
+
+3. RMarkdown basics 
+using RMarkdown to communicate with stakeholders
+
+4. Visualisation - introduction to ggplot
+e.g. sales data to demonstrate why to visualise. 
+
+Finding patterns and irregularities with visualisations
+
+5. Advanced visualizations 
+preparation of reports, RMarkdown extension
+dashboarding - flexdashboards
+how R can help to communicate with stakeholders, what new insights it can bring
+
+6. Introduction to data wrangling
+- tidy data and tidy accounting data
+- working with tibbles
+- data types
+- strings
+- factors
+- time/dates
+
+7. Further data wrangling and data transformation
+dplyr basics
+- select
+- filter
+- mutate
+- arrange
+- summarise
+
+8. Exploring accounting data
+exploratory data anaysis for accounting and with accounting data
+
+variation - irregularities and patterns in accounting data
+visualising distributions
+e.g. understanding problems in a company - finding insights in operational data
+
+covariation
+
+patterns and models (e.g. lm)
+
+9. Exploring accounting data - advanced
+focus on particular applications
+e.g. finding patterns in sales data
+investigating accounts receivable
+analysing working capital
+
+10. Working with time series data
+basics
+
+11. Time series - advanced
+case studies
+introduction to forecasting 
+e.g. budgeting
+planning operational cashflows (incoming/outgoing payments)
+
+12. Advanced cases and summary
+
+analysing cash flows
+preparation of financial reports
+analysis to uncover business problems
+
+**Message**: R is not only for automation, but value adding e.g. through findings new angles and new insights
+
+**Datasets**: available publicly:
 e.g. 
-
-from `tidyverse`:
-
-merge datasets - merging bank statements together
-
-"tidy data" - use merged bank statements to put them in "tidy data" 
-
-descriptive stats (min, max, medium, mean, etc.) - 
-
-summarise (tidyverse)
-
-group_by
-
-filter
-
-correct mistakes/erros
-
-pipes
-
-
-**Topics**:
-
-relate to data wrangling tasks?
-
-or relate to accounting data - e.g. bank statements, sales orders, procurement documents, etc.
-
-
-
-**10 topics**:
-
-1. Introduction: Introduce R and tidyverse in first lesson
-  - Installing Libraries
-  - Basic Functions/Variables and Datatypes with Accounting examples
-  - What is tidy data
-
-**TASK 2 for your FELIX**:
-
-search for "accounting related datasets" - sales orders, customer info, bank statements, procurement documents ANYTHING! it needs to be in free domain
-
 Kaggle Samples:
 Fin Data: https://www.kaggle.com/takahirokubo0/annual-financial-data-for-hybrid-cdp-kpi?select=cdp_financial_data.csv
 Sales: https://www.kaggle.com/kyanyoga/sample-sales-data
@@ -90,8 +123,6 @@ Procurement: https://www.kaggle.com/theworldbank/procurement-notices?select=proc
 Cash Flow: https://www.kaggle.com/cityofLA/los-angeles-general-city-budget-cash-flow
 
 
-**TASK 2 for your Maria**:
-LIST OF BOOKS HERE WITH LINKS:
 
 
 
