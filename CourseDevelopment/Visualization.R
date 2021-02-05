@@ -12,8 +12,12 @@ View(fin_data)
 
 #Create Plot
 ggplot(data = subset(fin_data, country_code == 'US')) + 
-  geom_point(mapping = aes(x = `Report Date`, y = Revenue, color = Ticker),
-  show.legend = FALSE)
+  geom_point(mapping = aes(x = EBITDA, y = Revenue))
+
+# Aesthetic Mapping
+ggplot(data = subset(fin_data, country_code == 'US')) + 
+  geom_point(mapping = aes(x = EBITDA, y = Revenue, color = Ticker)
+             )
 
 
 #Sales Data

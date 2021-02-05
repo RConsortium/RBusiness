@@ -7,14 +7,24 @@ tidyverse_update()
 #Fin-Data
 
 #Load Data
-fin_data <- read_csv("Library/Mobile Documents/com~apple~CloudDocs/Education/R/Tidy Accounting/Data/financial_data.csv")
+fin_data <- read_csv("~/Documents/GitHub/RBusiness/Developement/Tidy Accounting/Data/financial_data.csv")
 View(fin_data)
 
 #Create Plot
 ggplot(data = subset(fin_data, country_code == 'US')) + 
-  geom_point(mapping = aes(x = `Report Date`, y = Revenue, color = Ticker),
+  geom_point(mapping = aes(x = EBITDA, y = Revenue))
+
+# Aesthetic Mapping
+ggplot(data = subset(fin_data, country_code == 'US')) + 
+  geom_point(mapping = aes(x = EBITDA, y = Revenue, color = Ticker),
   show.legend = FALSE)
 
+#Facets
+
+#Facet Your Plot
+ggplot(data = subset(fin_data, country_code == 'US')) + 
+  geom_point(mapping = aes(x = EBITDA, y = Revenue)) + 
+  facet_wrap(~ `Fiscal Year`, nrow = 3)
 
 #Sales Data
 
