@@ -21,10 +21,27 @@ ggplot(data = subset(fin_data, country_code == 'US')) +
 
 #Facets
 
-#Facet Your Plot
+# Facet Your Plot
 ggplot(data = subset(fin_data, country_code == 'US')) + 
   geom_point(mapping = aes(x = EBITDA, y = Revenue)) + 
   facet_wrap(~ `Fiscal Year`, nrow = 3)
+
+# Facet Grid
+ggplot(data = subset(fin_data, country_code == 'US')) + 
+  geom_point(mapping = aes(x = EBITDA, y = Revenue)) + 
+    facet_grid(`Fiscal Year` ~ industries)
+
+#Geometric objects
+
+ggplot(data = subset(fin_data, country_code == 'US')) + 
+  geom_smooth(mapping = aes(x = EBITDA, y = Revenue))
+
+# Multiple Geoms on one plot
+ggplot(data = subset(fin_data, country_code == 'US' && Ticker == 'AAMC')) + 
+  geom_smooth(
+    mapping = aes(x = EBITDA, y = Revenue, color = Ticker),
+    show.legend = FALSE)
+
 
 #Sales Data
 
