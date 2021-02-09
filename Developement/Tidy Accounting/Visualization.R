@@ -4,9 +4,7 @@ library(readr)
 #Check Updates
 tidyverse_update()
 
-#Fin-Data
-
-#Load Data
+#Load Fin Data
 fin_data <- read_csv("~/Documents/GitHub/RBusiness/Developement/Tidy Accounting/Data/financial_data.csv")
 View(fin_data)
 
@@ -37,10 +35,51 @@ ggplot(data = subset(fin_data, country_code == 'US')) +
   geom_smooth(mapping = aes(x = EBITDA, y = Revenue))
 
 # Multiple Geoms on one plot
-ggplot(data = subset(fin_data, country_code == 'US' && Ticker == 'AAMC')) + 
-  geom_smooth(
-    mapping = aes(x = EBITDA, y = Revenue, color = Ticker),
+ggplot(data = subset(fin_data, country_code == 'US')) + 
+  geom_smooth(mapping = aes(x = EBITDA, y = Revenue, color = industries),
     show.legend = FALSE)
+
+# Place Geom and Point on the same plot
+ggplot(data = subset(fin_data, country_code == 'US'),mapping = aes(x = EBITDA, y = Revenue)) + 
+  geom_point(mapping = aes(color = industries), show.legend = FALSE) + 
+  geom_smooth()
+
+#Load Proc Data
+proc_data <- read_csv("~/Documents/GitHub/RBusiness/Developement/Tidy Accounting/Data/procurement_data.csv")
+View(proc_data)
+
+# Statistical Transformation
+
+# Bar chart
+ggplot(data = proc_data) + 
+  geom_bar(mapping = aes(x = `Notice Type`))
+
+# Display Proportions
+ggplot(data = proc_data) + 
+  geom_bar(mapping = aes(x = `Notice Type`, y = stat(prop), group = 1))
+
+# Reorder Bars
+ggplot(data = proc_data) + 
+  geom_bar(mapping = aes(x = reorder(`Notice Type`, -stat(prop)), y = stat(prop), group = 1))
+
+# More Stats
+ggplot(data = proc_data) + 
+  stat_summary(mapping = aes(x = `Notice Type`, y = stat(prop)),
+              fun.min = min,
+              fun.max = max,
+              fun = median)
+
+# Display sections in Bar Chart
+ggplot(data = proc_data) + 
+  geom_bar(mapping = aes(x = `Notice Type`, fill = `Country Code`), show.legend = FALSE)
+
+# Make bars same height
+ggplot(data = proc_data) + 
+  geom_bar(mapping = aes(x = `Notice Type`, fill = `Country Code`), position = 'fill', show.legend = FALSE)
+
+# Spread bars out
+ggplot(data = proc_data) + 
+  geom_bar(mapping = aes(x = `Notice Type`, fill = `Country Code`), position = 'dodge', show.legend = FALSE)
 
 
 #Sales Data
