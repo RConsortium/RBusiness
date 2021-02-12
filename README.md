@@ -17,11 +17,11 @@ The goal of R/Business is the promotion and support of the R programming environ
 
 Hosting and participating in events that further the adoption of R for finanical professionals is one of our top priorities. If you are interested in information on an event check out the Events folder for slides and additional info. 
 
-# Upcoming
+### Upcoming
 * WiDS Conference
 * iV21 Conference
 
-# Past
+### Past
 * WiDS Datathon
 * WiDS Training
 * Academic R Workshop
