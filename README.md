@@ -22,6 +22,7 @@ Hosting and participating in events that further the adoption of R for finanical
 * 25th International Conference Information Visualisation - July 5-16, 2021
 
 ### Past
+* Practical Applications of Network Science - Febuary 22-23, 2021
 * WiDS Datathon Melbourne - Febuary 5, 2021
 * WIDS Datathon Training - Febuary 3, 2021
 * Academic R Workshop -  January 28, 2021
